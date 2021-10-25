@@ -8,18 +8,19 @@ class CardEditor extends React.Component {
         this.state = { front: '', back: ''};
     }
 
-    handleFrontChange = event => {
-        console.log(event.target.name)
-        this.setState({ front: event.target.value }) //set value of front to user input
+    addCard = () => {
+        this.props.addCard(this.state); //this is the addCard function from App component
+        this.setState({front: '', back: ''}) //clear the input after adding
     }
 
-    handleBackChange = event => {
-        console.log(event.target.name)
-        this.setState({ back: event.target.value }) //set value of back to user input
-    }
+    deleteCard = index => this.props.deleteCard(index);
 
+    /* sets values of front and back to user input
+    event.target.name = front or back
+    event.target.value = user input
+    */
     handleChange = event => {
-        this.setState({[event.target.name]: event.target.value})
+        this.setState({[event.target.name]: event.target.value}); 
     }
 
     render() {
@@ -29,7 +30,7 @@ class CardEditor extends React.Component {
                     <td>{card.front}</td>
                     <td>{card.back}</td>
                     <td>
-                        <button>Delete card</button>
+                        <button onClick={() => this.deleteCard(index)}>Delete card</button>   
                     </td>
                 </tr>
             )
@@ -50,17 +51,17 @@ class CardEditor extends React.Component {
                 <br />
                 <input 
                     name="front"
-                    onChange = {this.handleFrontChange}
+                    onChange = {this.handleChange}
                     placeholder="front of card" 
                     value={this.state.front} //value of front passed back into input to be shown to user
                 />
                 <input 
                     name="back"
-                    onChange = {this.handleBackChange}
+                    onChange = {this.handleChange}
                     placeholder="back of card" 
                     value={this.state.back} //value of back passed back into input to be shown to user
                 />
-                <button>Add card</button>
+                <button onClick ={this.addCard}>Add card</button>
             </div>
         );
     }
