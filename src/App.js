@@ -1,6 +1,7 @@
 //import logo from './logo.svg';
 import React from 'react';
 import CardEditor from './CardEditor';
+import CardViewer from './CardViewer';
 
 /* app = parent component. keeps flashcard state for 
 editor and viewer*/
@@ -13,6 +14,7 @@ class App extends React.Component {
         { front: 'front1', back: 'back1' },
         { front: 'front2', back: 'back2' },
       ],
+      editor: true, 
     };
   }
 
@@ -28,8 +30,21 @@ class App extends React.Component {
     this.setState({ cards });
   };
 
+  //negate the editor state
+  switchMode = () => this.setState({ editor: !this.state.editor });
+
   render(){
-    return <CardEditor addCard = {this.addCard} cards={this.state.cards} />;
+    if (this.state.editor){
+      return <CardEditor 
+      addCard = {this.addCard} 
+      cards={this.state.cards}
+      deleteCard = {this.deleteCard} 
+      switchMode={this.switchMode}
+    />;
+    } else {
+      return <CardViewer switchMode={this.switchMode} />;
+    }
+    
   }
 }
 

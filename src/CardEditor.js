@@ -61,7 +61,9 @@ class CardEditor extends React.Component {
                     placeholder="back of card" 
                     value={this.state.back} //value of back passed back into input to be shown to user
                 />
-                <button onClick ={this.addCard}>Add card</button>
+                <button onClick={this.addCard}>Add card</button>
+                <hr/>
+                <button onClick={this.props.switchMode}>Go to card viewer</button>
             </div>
         );
     }
