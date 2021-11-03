@@ -13,14 +13,17 @@ class App extends React.Component {
       cards: [
         { front: 'front1', back: 'back1' },
         { front: 'front2', back: 'back2' },
+        { front: 'front3', back: 'back3' },
       ],
       editor: true,
     };
   }
 
   addCard = card => {
-    const cards = this.state.cards.slice().concat(card); //copy state of cards + concatenate new card
-    this.setState({ cards });
+    if (card.front.trim().length > 0 && card.back.trim().length > 0){
+      const cards = this.state.cards.slice().concat(card); //copy state of cards + concatenate new card
+      this.setState({ cards });
+    }
   };
 
   deleteCard = index => {
