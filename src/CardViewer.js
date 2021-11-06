@@ -1,5 +1,7 @@
 import React from 'react';
 
+import {Link} from 'react-router-dom';
+
 class CardViewer extends React.Component {
     constructor(props){
         super(props);
@@ -30,26 +32,26 @@ class CardViewer extends React.Component {
             <div> 
                 <h2>Card Viewer</h2>
                 <h4> Card {this.state.currentIndex + 1} out of {this.props.cards.length} </h4>
-                <button 
-                    // style = {{border: '3px solid Violet'}}
-                    onClick = {this.flipCard}> 
+                <div className="card" onClick={this.flipCard}> 
                     {card}
-                </button>
+                </div>
                 <hr/>
-                <button 
-                    onClick={this.nextCard}
-                    disabled={this.state.currentIndex === this.props.cards.length - 1}
-                    > 
-                    Next card 
-                </button>
                 <button 
                     onClick={this.prevCard}
                     disabled={this.state.currentIndex === 0}
                     > 
                     Prev card 
                 </button>
+                <button 
+                    onClick={this.nextCard}
+                    disabled={this.state.currentIndex === this.props.cards.length - 1}
+                    > 
+                    Next card 
+                </button>
                 <hr/>
-                <button onClick={this.props.switchMode}>Go to card editor</button>
+                <Link to="/editor">Go to card editor</Link>
+                <br />
+                <Link to="/">Homepage</Link>
             </div>
         )
     }
